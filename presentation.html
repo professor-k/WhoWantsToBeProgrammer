@@ -437,13 +437,23 @@
   }
 
   .title-main { animation: appear 0.5s 0.7s forwards, glitch 8s 3s infinite; }
+
+  /* dense slides — scale body to 85% (prompt + title stay default) */
+  #slide-llm .body-text,
+  #slide-2 .body-text { font-size: clamp(11.9px, 1.36vw, 16.15px); }
+  #slide-llm .col-box h3,
+  #slide-2 .col-box h3 { font-size: 11.05px; }
+  #slide-llm .term-list li,
+  #slide-2 .term-list li { font-size: clamp(11.05px, 1.275vw, 14.45px); }
+  #slide-llm .principle,
+  #slide-2 .principle { font-size: clamp(11.9px, 1.36vw, 15.3px); }
 </style>
 </head>
 <body>
 
 <div id="statusbar">
   <span>andriy@future:~$</span>
-  <span class="slide-counter" id="counter">01 / 13</span>
+  <span class="slide-counter" id="counter">01 / 16</span>
   <span id="clock" style="color:var(--green);letter-spacing:0.08em;"></span>
 </div>
 
@@ -506,30 +516,60 @@
     </div>
   </div>
 
+  <!-- SLIDE 1.5: MODERN LLMs / AGENTS / ORCHESTRATION -->
+  <div class="slide" id="slide-llm">
+    <div class="prompt">$ <span>./agent --autonomous --orchestrate</span></div>
+    <div class="slide-title">Ви вже знаєте <span class="accent">ChatGPT</span>. Але це вже вчорашній день.</div>
+    <div class="body-text" style="margin-bottom:20px;">
+      <p>Будьмо чесні — домашку вже частково робить він. Це нормально. Але чат-бот, який відповідає на питання, — це найпримітивніше, що вміє сучасний AI.</p>
+    </div>
+    <div class="two-col">
+      <div class="col-box amber-box">
+        <h3>// чат-бот — те, чим ви користуєтесь</h3>
+        <ul class="term-list">
+          <li><span>Ти питаєш — він відповідає <span class="warn">текстом.</span></span></li>
+          <li><span>Сам нічого не <span class="warn">робить</span>. Просто говорить.</span></li>
+          <li><span>Один крок: запит → відповідь → кінець.</span></li>
+        </ul>
+      </div>
+      <div class="col-box safe-box">
+        <h3>// агент — те, що працює прямо зараз</h3>
+        <ul class="term-list">
+          <li><span><span class="safe">Діє</span>, а не говорить: запускає код, читає файли, шукає в інтернеті, керує іншими програмами.</span></li>
+          <li><span>Працює <span class="safe">десятками кроків</span> сам — пробує, перевіряє, бачить помилку, виправляє, пробує знову.</span></li>
+          <li><span>Сам <span class="safe">вирішує</span>, що робити далі, щоб досягти мети.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="principle">
+      Оркестрація: один агент-«менеджер» ставить задачі десятку інших, вони працюють паралельно і перевіряють один одного — як команда розробників. Людина лише ставить мету і рецензує результат.
+    </div>
+  </div>
+
   <!-- SLIDE 2: WHAT'S HAPPENING -->
   <div class="slide" id="slide-2">
     <div class="prompt">$ <span>tail -f /var/log/industry.log</span></div>
     <div class="slide-title">Що зараз <span class="danger">відбувається</span> в індустрії</div>
     <div class="two-col" style="margin-top:8px;">
       <div class="col-box danger-box">
-        <h3>// факти, 2024–2025</h3>
+        <h3>// факти, 2026</h3>
         <ul class="term-list">
-          <li><span>Block (Jack Dorsey) — <span class="danger">−40% персоналу</span>.<br><span class="dim">Не через збитки. Через AI.</span></span></li>
-          <li><span>Klarna — <span class="danger">700 операторів</span> підтримки замінено одним агентом.<br><span class="dim">Обробляє 2/3 всіх звернень.</span></span></li>
-          <li><span>Claude Code, Copilot, Antigravity — <span class="warn">100% коду</span> у деяких компаніях пишеться AI.<br><span class="dim">Люди — рецензенти.</span></span></li>
+          <li><span>Salesforce — <span class="danger">більше не наймає інженерів</span>.<br><span class="dim">Benioff: «використовую кодувальних агентів». $300 млн на AI за рік, підтримку скоротили з 9 000 до 5 000.</span></span></li>
+          <li><span>2026: <span class="danger">&gt;113 000 звільнень</span> у tech за неповні пів року.<br><span class="dim">Близько половини компанії прямо називають причиною AI та автоматизацію.</span></span></li>
+          <li><span>В Anthropic AI пише <span class="warn">70–90% коду</span> (окремі інженери — 100%); у Microsoft і Google ~30%.<br><span class="dim">Люди — рецензенти.</span></span></li>
         </ul>
       </div>
       <div class="col-box amber-box">
         <h3>// що це означає</h3>
         <ul class="term-list">
-          <li><span>Junior-позиції <span class="danger">зникають першими</span>.<br><span class="dim">Саме туди більшість планувала потрапити.</span></span></li>
+          <li><span>Junior-позиції <span class="danger">зникають першими</span> — вакансій на 40–50% менше, ніж у 2024.<br><span class="dim">Саме туди більшість планувала потрапити.</span></span></li>
           <li><span>«Писати код» більше не є <span class="warn">достатньою</span> навичкою.<br></span></li>
           <li><span>Хто розуміє <span class="safe">як і чому</span> — лишається. Поки-що.<br><span class="dim">Хто просто виконує — ні.</span></span></li>
         </ul>
       </div>
     </div>
     <div class="principle">
-      Це не апокаліпсис. Це зміна правил гри — посеред партії. Таке вже було.
+      Але це не магія: Klarna у 2025 замінила 700 операторів підтримки на AI — і вже повертає людей, бо якість впала. Це не апокаліпсис, а зміна правил гри посеред партії. Таке вже було.
     </div>
   </div>
 
@@ -591,11 +631,11 @@
       Не список технологій. Технології змінюються. Принципи — рідше.
     </div>
     <ul class="term-list" style="max-width:820px;">
-      <li><span><strong style="color:var(--green)">Здатність вчитись швидше, ніж знання застарівають</strong> — єдина навичка з гарантованим терміном придатності.</span></li>
-      <li><span><strong style="color:var(--green)">Математика і логіка</strong> — фундамент того, що витісняє інших.</span></li>
-      <li><span><strong style="color:var(--amber)">Розуміння систем</strong> — не «як написати», а «чому воно так працює» і «що буде якщо».</span></li>
-      <li><span><strong style="color:var(--amber)">Комунікація і переконання</strong> — AI не несе відповідальності. Людина — так.</span></li>
-      <li><span><strong style="color:var(--amber)">Критичне мислення</strong> — AI впевнено бреше. Хтось має це помічати.</span></li>
+      <li><span><span class="safe">Здатність вчитись швидше, ніж знання застарівають</span> — єдина навичка з гарантованим терміном придатності.</span></li>
+      <li><span><span class="safe">Математика і логіка</span> — фундамент того, що витісняє інших.</span></li>
+      <li><span><span class="safe">Розуміння систем</span> — не «як написати», а «чому воно так працює» і «що буде якщо».</span></li>
+      <li><span><span class="safe">Комунікація і переконання</span> — AI не несе відповідальності. Людина — так.</span></li>
+      <li><span><span class="safe">Критичне мислення</span> — AI впевнено бреше. Хтось має це помічати.</span></li>
     </ul>
   </div>
 
@@ -626,10 +666,33 @@
     </div>
   </div>
 
-  <!-- SLIDE 7: NEOLITHIC SCALE -->
+  <!-- SLIDE 7: SPEED IS THE PROBLEM (follows revolutions) -->
+  <div class="slide" id="slide-8">
+    <div class="prompt">$ <span>diff neolithic.log industrial.log ai.log --speed</span></div>
+    <div class="slide-title">Проте є одна <span class="danger">критична</span> відмінність</div>
+    <div class="timeline" style="margin-top:8px;">
+      <div class="tl-item">
+        <div class="tl-line"><div class="tl-dot" style="background:var(--grey);box-shadow:none;"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-content"><span class="tl-year" style="color:var(--grey);">Неолітична революція</span> — розгорталась <strong style="color:var(--white)">тисячоліттями</strong>. Суспільство адаптувалось непомітно для окремої людини. Ніхто не відчував переходу.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-line"><div class="tl-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber);"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-content"><span class="tl-year">Промислові революції</span> — десятиліття. Болісно, але покоління встигало адаптуватись. Діти жили вже інакше.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-line"><div class="tl-dot" style="background:var(--red);box-shadow:0 0 8px var(--red);"></div></div>
+        <div class="tl-content"><span class="tl-year" style="color:var(--red);">Зараз</span> — <strong style="color:var(--red)">в межах одного покоління. Можливо одного десятиліття.</strong> Освіта, право, соціальний захист, культурні норми — все це адаптується за десятиліття. Технологія — за роки.</div>
+      </div>
+    </div>
+    <div class="principle" style="margin-top:20px; border-color:var(--red); background:rgba(255,49,49,0.05); color:var(--white);">
+      Справжня причина тривоги — не «роботи заберуть роботу». А те, що <strong style="color:var(--red)">швидкість адаптації суспільства катастрофічно відстає</strong> від швидкості технологічного зсуву. Ми живемо саме на цьому розриві, і він вже почався.
+    </div>
+  </div>
+
+  <!-- SLIDE 8: NEOLITHIC SCALE (follows speedup, leads into economy) -->
   <div class="slide" id="slide-7">
     <div class="prompt">$ <span>git log --all --oneline --since="10000 BC"</span></div>
-    <div class="slide-title">Можливо, існує навіть <span class="accent">точніша аналогія</span></div>
+    <div class="slide-title">І все ж — є навіть <span class="accent">точніша аналогія</span></div>
     <div class="body-text" style="margin-bottom:20px;">
       <p>Промислові революції — це свічечки. Справжня супернова була раніше.</p>
     </div>
@@ -650,29 +713,6 @@
           <li><span>Так само як землероб не «втратив полювання» — він перейшов в <strong style="color:var(--green)">якісно інший устрій</strong>.</span></li>
         </ul>
       </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 7b: SPEED IS THE PROBLEM -->
-  <div class="slide" id="slide-8">
-    <div class="prompt">$ <span>diff neolithic.log industrial.log ai.log --speed</span></div>
-    <div class="slide-title">Проте є одна <span class="danger">критична</span> відмінність</div>
-    <div class="timeline" style="margin-top:8px;">
-      <div class="tl-item">
-        <div class="tl-line"><div class="tl-dot" style="background:var(--grey);box-shadow:none;"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-content"><span class="tl-year" style="color:var(--grey);">Неолітична революція</span> — розгорталась <strong style="color:var(--white)">тисячоліттями</strong>. Суспільство адаптувалось непомітно для окремої людини. Ніхто не відчував переходу.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-line"><div class="tl-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber);"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-content"><span class="tl-year">Промислові революції</span> — десятиліття. Болісно, але покоління встигало адаптуватись. Діти жили вже інакше.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-line"><div class="tl-dot" style="background:var(--red);box-shadow:0 0 8px var(--red);"></div></div>
-        <div class="tl-content"><span class="tl-year" style="color:var(--red);">Зараз</span> — <strong style="color:var(--red)">в межах одного покоління. Можливо одного десятиліття.</strong> Освіта, право, соціальний захист, культурні норми — все це адаптується за десятиліття. Технологія — за роки.</div>
-      </div>
-    </div>
-    <div class="principle" style="margin-top:20px; border-color:var(--red); background:rgba(255,49,49,0.05); color:var(--white);">
-      Справжня причина тривоги — не «роботи заберуть роботу». А те, що <strong style="color:var(--red)">швидкість адаптації суспільства катастрофічно відстає</strong> від швидкості технологічного зсуву. Ми живемо саме на цьому розриві, і він вже почався.
     </div>
   </div>
 
@@ -754,8 +794,8 @@
 
 
   const slideIds = [
-    'slide-0','slide-1a','slide-1b','slide-1c','slide-2','slide-3','slide-4','slide-5',
-    'slide-5-skills','slide-6','slide-7','slide-8','slide-9','slide-10','slide-12'
+    'slide-0','slide-1a','slide-1b','slide-1c','slide-llm','slide-2','slide-3','slide-4',
+    'slide-5','slide-5-skills','slide-6','slide-8','slide-7','slide-9','slide-10','slide-12'
   ];
   const totalSlides = slideIds.length;
   let current = 0;
