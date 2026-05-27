@@ -32,14 +32,15 @@ exist and in what order. The script reads it to: generate the navigation dots, c
 To add, remove, or reorder a slide you must change **two** places in sync: the `slideIds`
 array and the corresponding `.slide` div. Changing only one breaks navigation.
 
-**Gotcha:** the slide `id`s are historical and do NOT reflect display order or count. The
-deck has 16 slides. Non-numeric ids are interleaved — `slide-llm` then `slide-meme` sit
-between `slide-1c` and `slide-2`, and `slide-5-skills` between `slide-5` and `slide-6`.
-`slide-10` and `slide-11` do not exist (the old singularity slide was merged into `slide-9`). Trust the
-array order and the HTML comments, not the numeric ids. Exactly one slide carries the
-`active` class as the initial slide. The hardcoded `01 / NN` text in `#counter` is just the
-pre-JS initial render — keep its total in sync with the slide count when adding/removing
-slides.
+**Gotcha:** neither the numeric `id`s nor the source (DOM) order reflect display order. The
+deck has 16 slides, and display order is whatever the `slideIds` array says — nothing else.
+Quirks to expect: `slide-llm` and `slide-meme` are non-numeric ids; `slide-10`/`slide-11` do
+not exist (the old singularity slide was merged into `slide-9`); and the profession block
+(`slide-3/4/5/5-skills`) lives in the source right after `slide-2` but is *displayed* later,
+after the revolutions block (`slide-6/7/8`). Always trust the `slideIds` array order and the
+HTML comments, not the numeric ids or source position. Exactly one slide carries the `active`
+class as the initial slide. The hardcoded `01 / NN` text in `#counter` is just the pre-JS
+initial render — keep its total in sync with the slide count when adding/removing slides.
 
 ### Visual design system (CSS)
 
