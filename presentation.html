@@ -114,17 +114,9 @@
     gap: 0;
   }
 
-  .title-strike {
-    font-size: clamp(20px, 3vw, 32px);
-    color: var(--red);
-    text-decoration: line-through;
-    text-decoration-color: var(--red);
-    text-decoration-thickness: 3px;
-    letter-spacing: 0.02em;
-    margin-bottom: 0;
-    opacity: 0;
-    animation: appear 0.4s 0.3s forwards;
-  }
+  /* main word morphs Programmer <-> Millionaire; static chars flicker randomly (see JS) */
+  .glitch-word { display: inline-block; }
+  .title-main .dud { opacity: 0.7; }
 
   .title-main {
     font-size: clamp(36px, 6vw, 72px);
@@ -469,8 +461,7 @@
 
   <!-- SLIDE 0: TITLE -->
   <div class="slide active" id="slide-0" style="justify-content:center;">
-    <div class="title-strike">Who Wants to Be a Millionaire?</div>
-    <div class="title-main">Who Wants to Be<br>a Programmer?</div>
+    <div class="title-main"><span class="gtext">Who Wants to Be</span><br><span class="gtext">a </span><span class="glitch-word" id="glitchWord">Programmer</span><span class="gtext">?</span></div>
     <div class="title-sub">No-Bullshit Edition</div>
     <div class="title-meta">
       <span class="highlight">Andriy Kvasnytsya</span> · Senior Engineer, microtherapy inc<br>
@@ -501,7 +492,7 @@
       <li><span>Гроші? <span class="dim">— чесна відповідь.</span></span></li>
       <li><span>Цікаво? <span class="dim">— ще краща відповідь.</span></span></li>
       <li><span>Батьки сказали? <span class="dim">— добре хоч чесно.</span></span></li>
-      <li><span>Не знаю, але математика подобається? <span class="safe">— це ми опрацюємо.</span></span></li>
+      <li><span>Не знаю, але математика подобається? <span class="dim">— це ми теж поважаємо.</span></span></li>
     </ul>
   </div>
 
@@ -827,6 +818,91 @@
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') changeSlide(1);
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
   });
+
+  // Title slide glitch: the word morphs Programmer <-> Millionaire, and every title
+  // character (the word included) randomly flickers for ~200-300ms.
+  (function () {
+    const titleEl = document.querySelector('#slide-0 .title-main');
+    const wordEl = document.getElementById('glitchWord');
+    if (!titleEl || !wordEl) return;
+    const PROG = 'Programmer', MILL = 'Millionaire';
+    const chars = '!<>-_\\/[]{}=+*^?#01XZ$%&';
+    const rndChar = () => chars[Math.floor(Math.random() * chars.length)];
+
+    // wrap each char of `text` in a span inside `host`; return the non-space spans
+    function splitCells(host, text) {
+      host.textContent = '';
+      const out = [];
+      for (const ch of text) {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        s.dataset.ch = ch;
+        host.appendChild(s);
+        if (ch.trim()) out.push(s);
+      }
+      return out;
+    }
+
+    const staticCells = [];
+    titleEl.querySelectorAll('.gtext').forEach(seg => {
+      staticCells.push(...splitCells(seg, seg.textContent));
+    });
+    let wordCells = splitCells(wordEl, PROG);
+    let morphing = false;
+
+    // --- ambient per-character flicker over the whole title (word included) ---
+    function flick() {
+      const pool = morphing ? staticCells : staticCells.concat(wordCells);
+      if (pool.length) {
+        const cell = pool[Math.floor(Math.random() * pool.length)];
+        cell.textContent = rndChar();
+        cell.classList.add('dud');
+        setTimeout(() => {
+          cell.textContent = cell.dataset.ch;
+          cell.classList.remove('dud');
+        }, 200 + Math.random() * 100);
+      }
+      setTimeout(flick, 750 + Math.random() * 2700);
+    }
+    setTimeout(flick, 1500);
+
+    // --- main word morph (owns wordEl while running) ---
+    function scramble(from, to, done) {
+      const len = Math.max(from.length, to.length);
+      const q = [];
+      for (let i = 0; i < len; i++) {
+        const start = Math.floor(Math.random() * 4);
+        const end = start + 3 + Math.floor(Math.random() * 6);
+        q.push({ f: from[i] || '', t: to[i] || '', start, end, c: null });
+      }
+      let frame = 0;
+      (function tick() {
+        let out = '', complete = 0;
+        for (const it of q) {
+          if (frame >= it.end) { complete++; out += it.t; }
+          else if (frame >= it.start) {
+            if (!it.c || Math.random() < 0.28) it.c = rndChar();
+            out += '<span class="dud">' + it.c + '</span>';
+          } else { out += it.f; }
+        }
+        wordEl.innerHTML = out;
+        if (complete === q.length) { if (done) done(); }
+        else { frame++; requestAnimationFrame(tick); }
+      })();
+    }
+
+    function cycle() {
+      morphing = true;
+      scramble(PROG, MILL, () => setTimeout(() => {
+        scramble(MILL, PROG, () => {
+          wordCells = splitCells(wordEl, PROG); // re-expose the word's chars to the flicker
+          morphing = false;
+          setTimeout(cycle, 6500);
+        });
+      }, 400));
+    }
+    setTimeout(cycle, 3200);
+  })();
 </script>
 </body>
 </html>
