@@ -447,6 +447,14 @@
   #slide-2 .term-list li { font-size: clamp(11.05px, 1.275vw, 14.45px); }
   #slide-llm .principle,
   #slide-2 .principle { font-size: clamp(11.9px, 1.36vw, 15.3px); }
+
+  /* slide-9 is the densest (lead + two-col + finale) — scale the whole slide to 80% */
+  #slide-9 .prompt { font-size: 10.4px; }
+  #slide-9 .slide-title { font-size: clamp(17.6px, 2.8vw, 33.6px); }
+  #slide-9 .body-text { font-size: clamp(11.2px, 1.28vw, 15.2px); }
+  #slide-9 .col-box h3 { font-size: 10.4px; }
+  #slide-9 .term-list li { font-size: clamp(10.4px, 1.2vw, 13.6px); }
+  #slide-9 .principle { font-size: clamp(11.2px, 1.28vw, 14.4px); }
 </style>
 </head>
 <body>
@@ -544,6 +552,16 @@
     <div class="principle">
       Оркестрація: один агент-«менеджер» ставить задачі десятку інших, вони працюють паралельно і перевіряють один одного — як команда розробників. Людина лише ставить мету і рецензує результат.
     </div>
+  </div>
+
+  <!-- SLIDE 1.6: MEME / DISCLAIMER -->
+  <div class="slide" id="slide-meme" style="align-items:center; justify-content:flex-start;">
+    <div class="prompt" style="align-self:flex-start;">$ <span>git blame presentation.html</span></div>
+    <div class="body-text" style="text-align:center; max-width:920px; margin-bottom:16px;">
+      <p>Для створення цієї презентації була використана <span style="color:var(--red); font-weight:700;">рабська праця Claude Code</span> <span style="color:var(--grey);">(насправді ні, він у мене найманий працівник, і я його не ображаю)</span>.</p>
+    </div>
+    <img src="meme-it-guy-3am.png" alt="Other People With ChatGPT vs Random IT Guy At 3 AM"
+         style="max-height:62vh; max-width:100%; object-fit:contain; border:1px solid var(--green-dim); box-shadow:0 0 24px rgba(57,255,20,0.15);">
   </div>
 
   <!-- SLIDE 2: WHAT'S HAPPENING -->
@@ -662,11 +680,31 @@
       </div>
     </div>
     <div class="principle" style="margin-top:16px;">
-      Кожна революція руйнувала одні роботи та створювала інші. Різниця цього разу — швидкість.
+      Кожна революція руйнувала одні роботи та створювала інші. Але, можливо, це навіть не та революція, з якою варто порівнювати.
     </div>
   </div>
 
-  <!-- SLIDE 7: SPEED IS THE PROBLEM (follows revolutions) -->
+  <!-- SLIDE 7: NEOLITHIC SCALE (follows revolutions, leads into speedup) -->
+  <div class="slide" id="slide-7">
+    <div class="prompt">$ <span>git log --all --oneline --since="10000 BC"</span></div>
+    <div class="slide-title">І все ж — є навіть <span class="accent">точніша аналогія</span></div>
+    <div class="body-text" style="margin-bottom:20px;">
+      <p>Промислові революції — це свічечки. Справжня супернова була раніше.</p>
+    </div>
+    <div class="col-box amber-box" style="max-width:880px;">
+      <h3>// ~10 000 до н.е. — неолітична революція</h3>
+      <ul class="term-list">
+        <li><span><strong>Технологія:</strong> одомашнення рослин і тварин, пізніше плуг</span></li>
+        <li><span><strong>Вибули:</strong> мисливці, збирачі, кочові вожді — <span class="danger">100% попередніх професій</span></span></li>
+        <li><span><strong>З'явились:</strong> землероби, ремісники, жерці, писарі, торговці, правителі — <span class="safe">тобто вся подальша цивілізація</span></span></li>
+      </ul>
+    </div>
+    <div class="principle" style="margin-top:20px;">
+      AI + фізичні роботи = потенціал зсуву <strong style="color:var(--amber)">такого самого масштабу</strong>. Що це означатиме особисто для нас — повернемось наприкінці. Бо спершу — відмінність, якої тоді не було.
+    </div>
+  </div>
+
+  <!-- SLIDE 8: SPEED IS THE PROBLEM (follows neolithic) -->
   <div class="slide" id="slide-8">
     <div class="prompt">$ <span>diff neolithic.log industrial.log ai.log --speed</span></div>
     <div class="slide-title">Проте є одна <span class="danger">критична</span> відмінність</div>
@@ -689,43 +727,19 @@
     </div>
   </div>
 
-  <!-- SLIDE 8: NEOLITHIC SCALE (follows speedup, leads into economy) -->
-  <div class="slide" id="slide-7">
-    <div class="prompt">$ <span>git log --all --oneline --since="10000 BC"</span></div>
-    <div class="slide-title">І все ж — є навіть <span class="accent">точніша аналогія</span></div>
-    <div class="body-text" style="margin-bottom:20px;">
-      <p>Промислові революції — це свічечки. Справжня супернова була раніше.</p>
-    </div>
-    <div class="two-col">
-      <div class="col-box amber-box">
-        <h3>// ~10 000 до н.е. — неолітична революція</h3>
-        <ul class="term-list">
-          <li><span><strong>Технологія:</strong> одомашнення рослин і тварин, пізніше плуг</span></li>
-          <li><span><strong>Вибули:</strong> мисливці, збирачі, кочові вожді — <span class="danger">100% попередніх професій</span></span></li>
-          <li><span><strong>З'явились:</strong> землероби, ремісники, жерці, писарі, торговці, воїни-професіонали, правителі — <span class="safe">тобто вся подальша цивілізація</span></span></li>
-        </ul>
-      </div>
-      <div class="col-box safe-box">
-        <h3>// що це означає зараз</h3>
-        <ul class="term-list">
-          <li><span>AI + фізичні роботи = потенціал <strong style="color:var(--green)">такого самого масштабу</strong></span></li>
-          <li><span>Це не «втрата роботи». Це <strong style="color:var(--green)">вихід з 10 000-річної епохи</strong> де виживання вимагало праці.</span></li>
-          <li><span>Так само як землероб не «втратив полювання» — він перейшов в <strong style="color:var(--green)">якісно інший устрій</strong>.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 9: ECONOMY -->
+  <!-- SLIDE 9: ECONOMICS + WHAT'S BEYOND (merged singularity) -->
   <div class="slide" id="slide-9">
-    <div class="prompt">$ <span>python3 economics.py --model=post-ai</span></div>
-    <div class="slide-title">Вплив на <span class="accent">економіку</span></div>
+    <div class="prompt">$ <span>python3 economics.py --horizon=post-singularity</span></div>
+    <div class="slide-title">Економіка — і те, що <span class="accent">по той бік</span></div>
+    <div class="body-text" style="margin-bottom:18px;">
+      <p><strong style="color:var(--amber)">Обіцяне «що це означає для нас»:</strong> це не просто «втрата роботи», а <strong style="color:var(--green)">вихід з 10 000-річної епохи</strong>, де виживання вимагало праці — як землероб колись не «втратив полювання», а перейшов у якісно інший устрій.</p>
+    </div>
     <div class="two-col">
       <div class="col-box safe-box">
         <h3>// хороші новини</h3>
         <ul class="term-list">
-          <li><span><strong>Споживча дефляція</strong> — те, що коштувало $10,000 юридичних послуг, скоро коштуватиме $20/міс. Якість життя зростає без зростання зарплат.</span></li>
-          <li><span><strong>Здешевлення всього</strong> — медицина, освіта, програмне забезпечення, аналіз даних.</span></li>
+          <li><span><strong>Споживча дефляція</strong> — те, що коштувало $10,000 юридичних послуг, скоро коштуватиме $20/міс.</span></li>
+          <li><span><strong>Здешевлення всього</strong> — медицина, освіта, софт, аналіз даних.</span></li>
           <li><span><strong>Продуктивність</strong> — одна людина робить те, що раніше робила команда.</span></li>
         </ul>
       </div>
@@ -738,24 +752,8 @@
         </ul>
       </div>
     </div>
-  </div>
-
-  <!-- SLIDE 10: SINGULARITY -->
-  <div class="slide" id="slide-10">
-    <div class="prompt">$ <span>./singularity --eta=unknown --output=?</span></div>
-    <div class="slide-title">Ущільнення часу. <span class="accent">Що далі?</span></div>
-    <div class="body-text">
-      <p>1900 → 2000: 100 років змін.<br>
-      2000 → 2020: 20 років змін.<br>
-      2020 → 2025: зміни, які раніше зайняли б десятиліття.</p>
-      <p>Це не лінійний прогрес — це <strong style="color:var(--amber)">прискорення з прискоренням</strong>.</p>
-    </div>
-    <div class="big-stat" style="margin: 16px 0;">
-      <div class="number" style="color:var(--amber)">?</div>
-      <div class="label" style="color:var(--grey)">Це чесна відповідь на питання «що буде після сингулярності». Вперше в історії людства ніхто не знає.</div>
-    </div>
     <div class="principle">
-      Можливий сценарій: AI бере на себе більшість рутинної праці. Люди працюють тільки тоді, коли хочуть. UBI або аналог. Це не утопія і не антиутопія — це просто інший устрій. І він може настати при нашому житті.
+      Можливий устрій: AI бере на себе рутину, людина працює лише коли хоче, UBI або аналог. Утопія? Антиутопія? <strong style="color:var(--amber)">Чесна відповідь — ніхто не знає:</strong> вперше в історії людства «що далі?» не має відповіді. І настати це може при нашому житті.
     </div>
   </div>
 
@@ -794,8 +792,8 @@
 
 
   const slideIds = [
-    'slide-0','slide-1a','slide-1b','slide-1c','slide-llm','slide-2','slide-3','slide-4',
-    'slide-5','slide-5-skills','slide-6','slide-8','slide-7','slide-9','slide-10','slide-12'
+    'slide-0','slide-1a','slide-1b','slide-1c','slide-llm','slide-meme','slide-2','slide-3','slide-4',
+    'slide-5','slide-5-skills','slide-6','slide-7','slide-8','slide-9','slide-12'
   ];
   const totalSlides = slideIds.length;
   let current = 0;

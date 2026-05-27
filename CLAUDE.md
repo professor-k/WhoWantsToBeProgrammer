@@ -4,11 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single self-contained HTML slide deck: `presentation.html`. It's a talk titled
+An HTML slide deck: `presentation.html`. It's a talk titled
 *"Who Wants to Be a Programmer — No Bullshit Edition"* by Andriy Kvasnytsya, about AI's
 impact on the programming profession and on jobs in general. **All slide content is in
-Ukrainian.** There is no build system, no package manager, no tests, and no dependencies
-to install — the only external resource is Google Fonts loaded via CDN at runtime.
+Ukrainian.** There is no build system, no package manager, and no tests. External resources:
+Google Fonts (loaded via CDN at runtime) and one local image asset, `meme-it-guy-3am.png`,
+referenced relatively by `slide-meme` — keep it alongside the HTML when moving the deck.
 
 ## Running / previewing
 
@@ -32,13 +33,13 @@ To add, remove, or reorder a slide you must change **two** places in sync: the `
 array and the corresponding `.slide` div. Changing only one breaks navigation.
 
 **Gotcha:** the slide `id`s are historical and do NOT reflect display order or count. The
-deck has 16 slides. Notably `slide-5-skills` sits between `slide-5` and `slide-6`,
-`slide-llm` sits between `slide-1c` and `slide-2`, and the deck deliberately displays
-`slide-8` (speedup) **before** `slide-7` (neolithic) — the array order is `… slide-6,
-slide-8, slide-7, slide-9 …`. `slide-11` does not exist. Trust the array order and the HTML
-comments, not the numeric ids. Exactly one slide carries the `active` class as the initial
-slide. The hardcoded `01 / NN` text in `#counter` is just the pre-JS initial render — keep
-its total in sync with the slide count when adding/removing slides.
+deck has 16 slides. Non-numeric ids are interleaved — `slide-llm` then `slide-meme` sit
+between `slide-1c` and `slide-2`, and `slide-5-skills` between `slide-5` and `slide-6`.
+`slide-10` and `slide-11` do not exist (the old singularity slide was merged into `slide-9`). Trust the
+array order and the HTML comments, not the numeric ids. Exactly one slide carries the
+`active` class as the initial slide. The hardcoded `01 / NN` text in `#counter` is just the
+pre-JS initial render — keep its total in sync with the slide count when adding/removing
+slides.
 
 ### Visual design system (CSS)
 
