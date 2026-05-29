@@ -78,9 +78,7 @@
     flex: 1;
     display: flex;
     align-items: stretch;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
   }
 
   .slide {
@@ -451,8 +449,14 @@
   #slide-9 .term-list li { font-size: clamp(10.4px, 1.2vw, 13.6px); }
   #slide-9 .principle { font-size: clamp(11.2px, 1.28vw, 14.4px); }
 
-  /* Narrow screens (phones): reclaim the wide side padding for readability */
+  /* Narrow screens (phones): reclaim the wide side padding for readability,
+     and allow scrolling here only — large screens stay fixed (no scrollbar). */
   @media (max-width: 640px) {
+    .slide-container {
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
     .slide { padding: 24px 18px 20px; }
     .two-col { grid-template-columns: 1fr; gap: 16px; }
   }
